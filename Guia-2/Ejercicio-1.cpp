@@ -16,34 +16,38 @@ float calcPromedio(int, float[]);
 string verificarPromedio(float);
 
 int main() {
-    ingresarDatos();
-    
     int n;
     cout << "Ingrese la cantidad de notas: ";
     cin >> n;
 
     estudiante.notas[n];
 
+    ingresarDatos();
+
     ingresarNotas(n, estudiante.notas);
 
-    estudiante.estado = verificarPromedio(calcPromedio(n, estudiante.notas));
+    float promedio = calcPromedio(n, estudiante.notas);
 
-    cout << calcPromedio(n, estudiante.notas) << endl;
-    cout << estudiante.estado << endl;
+    estudiante.estado = verificarPromedio(promedio);
+
+    cout << "\n" << "Mostrando informacion del estudiante" << endl;
+    cout << "Nombre del estudiante: " << estudiante.nombre << endl;
+    cout << "Apellido del estudiante: " << estudiante.apellido << endl;
+    cout << "El estudiante está " << estudiante.estado << " con un promedio de " << promedio << endl;
 }
 
 void ingresarDatos() {
     cout << "Ingrese el nombre del estudiante: ";
     cin >> estudiante.nombre;
     cout << "Ingrese el apellido del estudiante: ";
-    cin >> estudiante.apellido;
+    cin >> estudiante.apellido;    
 }
 
 void ingresarNotas(int n, float *notas) {
     cout << "\n" << "Ingrese las notas del estudiante" << endl;
     for (int i = 0; i < n; i++)
     {
-        cout << "Nota [" << i << "]: ";
+        cout << "Notas [" << i << "]: ";
         cin >> estudiante.notas[i];
     }
 }
@@ -56,15 +60,15 @@ float calcPromedio(int n, float *notas) {
     }
 
     promedio = suma/n;
-
+    
     return promedio;
 }
 
 string verificarPromedio(float promedio) {
-    if (promedio >= 6) {
+    if (promedio >= 6)
+    {
         return "Aprobado";
     }else {
         return "Reprobado";
     }
-    
 }

@@ -1,31 +1,33 @@
 #include <iostream>
 using namespace std;
 
-float raiz(float, float, int);
+float raiz(int, float, int);
 
 int main() {
-    float n;
-    cout << "Ingrese un entero positivo: ";
-    cin >> n;
-
+    int n;
     float r;
+
+    cout << "Ingrese el numero al cual se le quiere calcular la raiz: ";
+    cin >> n;
 
     cout << "Ingrese el valor semilla: ";
     cin >> r;
 
     int cont = 0;
 
-    cout << "La raiz cuadrada es " << raiz(n, r, cont) << endl;
+    cout << raiz(n, r, cont) << endl;
 }
 
-float raiz(float n, float siguiente, int cont) {
+float raiz(int n, float r, int cont) {
     cont++;
-    cout << cont << endl;
-    float anterior = siguiente;
-    siguiente = ((n/siguiente)+siguiente)/2;
-    if (anterior - siguiente < 0.000000001) {
-        return siguiente;
+    cout << "\n" << "Ejecucion #" << cont << endl;
+    float a = r;
+    r = ((n/r)+r)/2;
+    cout << r << " - " << a << endl;
+    if (abs(r-a) < 0.0000001)
+    {
+        return r;
     }else {
-        return raiz(n, siguiente, cont);
-    }
+        return raiz(n, r, cont);
+    }  
 }

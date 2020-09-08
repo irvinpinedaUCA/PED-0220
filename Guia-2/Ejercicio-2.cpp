@@ -8,31 +8,29 @@ struct Estudiante {
     float* notas;
 };
 
-void ingresarDatos(int, int, Estudiante[]);
+void ingresarDatos(int, Estudiante[]);
 float *ingresarNotas(int);
 float calcPromedio(int, float[]);
 int encontrarMayor(int, float[]);
-void devolverEstudiante(int, Estudiante[]);
+void devolverInformacion(int, Estudiante[]);
 
 int main() {
-    int n, cn;
-
+    int n;
     cout << "Ingrese la cantidad de estudiantes: ";
     cin >> n;
 
-    cout << "Ingrese la cantidad de notas de los estudiantes: ";
-    cin >> cn;
-
     struct Estudiante estudiantes[n];
 
-    ingresarDatos(n, cn, estudiantes);
+    ingresarDatos(n, estudiantes);
 
-    for (int i = 0; i < n; i++) {
+    int cn;
+    cout << "\n" << "Ingrese la cantidad de notas: ";
+    cin >> cn;
+
+    for(int i = 0; i < n; i++) {
         estudiantes[i].notas[cn];
 
-        cout << "\n" << "Ingresando las notas del estudiante [" << i << "]" << endl;
-        cin.clear();
-
+        cout << "\n" << "Ingresando notas del estudiante [" << i << "]" << endl;
         estudiantes[i].notas = ingresarNotas(cn);
     }
     
@@ -42,22 +40,21 @@ int main() {
         promedios[i] = calcPromedio(cn, estudiantes[i].notas);
     }
 
-    int posMayor;
-
-    posMayor = encontrarMayor(n, promedios);
+    int pos = encontrarMayor(n, promedios);
     
-    devolverEstudiante(posMayor, estudiantes);
+    devolverInformacion(pos, estudiantes);
 
     return 0;
 }
 
-void ingresarDatos(int n, int cn, Estudiante *estudiantes) {
-    for (int i = 0; i < n; i++) {
-        cout << "\n" << "Ingresando datos del estudiante [" << i << "]" << endl;
-        
+void ingresarDatos(int n, Estudiante *estudiantes) {
+    for (int i = 0; i < n; i++)
+    {
+        cout << "\n" << "Ingresando datos del estudiante [" << i <<"]" << endl;
+
         cout << "Ingrese el nombre del estudiante: ";
         cin >> estudiantes[i].nombre;
-        
+
         cout << "Ingrese el apellido del estudiante: ";
         cin >> estudiantes[i].apellido;
     }
@@ -66,7 +63,8 @@ void ingresarDatos(int n, int cn, Estudiante *estudiantes) {
 float *ingresarNotas(int cn) {
     float *notas = new float[cn];
 
-    for (int i = 0; i < cn; i++) {
+    for (int i = 0; i < cn; i++)
+    {
         cout << "Nota [" << i << "]: ";
         cin >> notas[i];
     }
@@ -74,31 +72,34 @@ float *ingresarNotas(int cn) {
     return notas;
 }
 
-float calcPromedio(int cn, float *notas) {
+float calcPromedio(int n, float *promedios) {
     float suma = 0, promedio = 0;
 
-    for (int i = 0; i < cn; i++) {
-        suma += notas[i];
+    for (int i = 0; i < n; i++)
+    {
+        suma += promedios[i];
     }
-    
-    promedio = suma/cn;
 
+    promedio = suma/n;
+    
     return promedio;
 }
 
-int encontrarMayor(int n, float *promedios) {
+int encontrarMayor(int cn, float *promedios) {
     float mayor = 0;
     int posicion;
-    for (int i = 0; i < n; i++) {
-        if (promedios[i] > mayor) {
+
+    for (int i = 0; i < cn; i++)
+    {
+        if (promedios[i] > mayor)
+        {
             mayor = promedios[i];
             posicion = i;
         }
     }
-
     return posicion;
 }
 
-void devolverEstudiante(int pos, Estudiante *estudiantes) {
-    cout << "\n" << "El estudiante con el mayor promedio es: " << estudiantes[pos].nombre << " " << estudiantes[pos].apellido << endl;
+void devolverInformacion(int pos, Estudiante *estudiantes) {
+    cout << "\n" << "El estudiante con el mayor promedio es " << estudiantes[pos].nombre << " " << estudiantes[pos].apellido << endl;
 }
