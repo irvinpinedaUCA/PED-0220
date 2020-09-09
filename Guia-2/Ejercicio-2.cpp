@@ -28,8 +28,6 @@ int main() {
     cin >> cn;
 
     for(int i = 0; i < n; i++) {
-        estudiantes[i].notas[cn];
-
         cout << "\n" << "Ingresando notas del estudiante [" << i << "]" << endl;
         estudiantes[i].notas = ingresarNotas(cn);
     }
