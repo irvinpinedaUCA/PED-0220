@@ -11,8 +11,8 @@ struct Estudiante {
 struct Estudiante estudiante;
 
 void ingresarDatos();
-void ingresarNotas(int, float[]);
-float calcPromedio(int, float[]);
+void ingresarNotas(int);
+float calcPromedio(int);
 string verificarPromedio(float);
 
 int main() {
@@ -24,9 +24,9 @@ int main() {
 
     ingresarDatos();
 
-    ingresarNotas(n, estudiante.notas);
+    ingresarNotas(n);
 
-    float promedio = calcPromedio(n, estudiante.notas);
+    float promedio = calcPromedio(n);
 
     estudiante.estado = verificarPromedio(promedio);
 
@@ -43,7 +43,7 @@ void ingresarDatos() {
     cin >> estudiante.apellido;    
 }
 
-void ingresarNotas(int n, float *notas) {
+void ingresarNotas(int n) {
     cout << "\n" << "Ingrese las notas del estudiante" << endl;
     for (int i = 0; i < n; i++)
     {
@@ -52,11 +52,11 @@ void ingresarNotas(int n, float *notas) {
     }
 }
 
-float calcPromedio(int n, float *notas) {
+float calcPromedio(int n) {
     float suma = 0, promedio = 0;
     for (int i = 0; i < n; i++)
     {
-        suma += notas[i];
+        suma += estudiante.notas[i];
     }
 
     promedio = suma/n;
