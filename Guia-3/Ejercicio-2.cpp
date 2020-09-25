@@ -50,11 +50,9 @@ void showStack(Stack *s) {
 }
 
 bool isPair(int num) {
-    if (num % 2 == 0)
-    {
+    if (num % 2 == 0) {
         return true;
-    }else
-    {
+    }else {
         return false;
     }
 }
@@ -65,7 +63,7 @@ int main() {
     initialize(&si);
 
     int n;
-    cout << "Ingrese el tamaño de los arreglos; ";
+    cout << "Ingrese el tamaño de los arreglo: ";
     cin >> n;
 
     int a[n], b[n], prod[n];
@@ -75,33 +73,31 @@ int main() {
         cout << "Elemento [" << i << "]: ";
         cin >> a[i];
     }
-
+    
     cout << "\n" << "Ingresando valores para el segundo arreglo: " << endl;
     for (int i = 0; i < n; i++) {
         cout << "Elemento [" << i << "]: ";
         cin >> b[i];
     }
 
-    cout << "\n" << "Almacenando productos: " << endl;
+    cout << "\n" << "Multiplicando los valores en los arreglos a y b: " << endl;
     for (int i = 0; i < n; i++) {
-        cout << "Multiplicando a[" << i << "] x b[" << i << "]" << endl;
-        prod[i] = a[i] * b[i];
+        prod[i] = a[i]*b[i];
     }
-    
-    cout << "\n" << "Verficando pares o impares para agregar a pilas: " << endl;
+
+    cout << "\n" << "Verificando par e impar para agregar a pilas: " << endl;
     for (int i = 0; i < n; i++) {
-        if (isPair(prod[i]))
-        {
+        if (isPair(prod[i])) {
             push(&sp, prod[i]);
         }else {
             push(&si, prod[i]);
         }
     }
-
-    cout << "\n" << "Mostrando la pila de los pares" << endl;
+    
+    cout << "\n" << "Mostrando pila de pares" << endl;
     showStack(&sp);
 
-    cout << "\n" << "Mostrando la pila de los impares" << endl;
+    cout << "\n" << "Mostrando pila de impares" << endl;
     showStack(&si);
 
     cout << endl;

@@ -44,19 +44,20 @@ bool isPair(int num) {
 
 void sum(Stack *s, int sumP, int sumI) {
     if (empty(s)) {
-        cout << "Mostrando la suma de los pares: " << sumP << endl;
-        cout << "Mostrando la suma de los impares: " << sumI << endl;
+        cout << "Mostrando suma de los pares: " << sumP << endl;
+        cout << "Mostrando suma de los impares: " << sumI << endl;
         return;
     }else {
-        if (isPair((*s)->element)) {
+        if (isPair((*s)->element))
+        {
             sumP += (*s)->element;
-            pop(s);
-        }else {
+        }else{
             sumI += (*s)->element;
-            pop(s);
         }
+        pop(s);
         sum(s, sumP, sumI);
     }
+    
 }
 
 int main() {
