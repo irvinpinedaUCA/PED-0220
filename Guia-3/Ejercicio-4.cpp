@@ -51,9 +51,23 @@ void showStack(Stack *s) {
     }
 }
 
+void invert(Stack *s, Stack *i) {
+    if (empty(s)) {
+       return;
+    }else {
+        int aux = (*s)->element;
+        pop(s);
+        push(i, aux);
+
+        invert(s, i);
+    }
+    
+}
+
 int main() {
-    Stack stack;
+    Stack stack, invStack;
     initialize(&stack);
+    initialize(&invStack);
 
     push(&stack, 1);
     push(&stack, 2);
@@ -66,4 +80,16 @@ int main() {
     push(&stack, 9);
     push(&stack, 10);
 
+   
+    cout << "Mostrando pila original" << endl;
+    showStack(&stack);
+    cout << endl;
+
+    invert(&stack, &invStack);
+
+    cout << "Mostrando pila invertida" << endl;
+    showStack(&invStack);
+    cout << endl;
+
+    
 }
