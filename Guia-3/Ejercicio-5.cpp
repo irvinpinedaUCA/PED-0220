@@ -52,6 +52,8 @@ int main() {
     Stack bookStack;
     initialize(&bookStack);
 
+    cout << "prueba" << endl;
+
     push(&bookStack, "Libro 1", 250);
     push(&bookStack, "Libro 2", 150);
     push(&bookStack, "Libro 3", 175);
