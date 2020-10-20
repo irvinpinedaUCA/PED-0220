@@ -126,7 +126,7 @@ bool asignarRevista(vector<Estudiante> *listaEstudiantes, int carnet, Revista *r
                     Fue asignado al estudiante <nombre> <apellido>, con carnet <carnet>
                     */
                     cout << "La revista '" << listaEstudiantes->at(pos).revista->titulo << "' de " << listaEstudiantes->at(pos).revista->autor
-                         << ", (Vol. " << listaEstudiantes->at(pos).revista->volumen << ") Issue #" << listaEstudiantes->at(pos).revista->issue
+                         << ", (Vol. " << listaEstudiantes->at(pos).revista->volumen << ") Issue #" << listaEstudiantes->at(pos).revista->issues
                          << ". ISSN #" << listaEstudiantes->at(pos).revista->issn << "." << endl;
                     cout << "Fue asignado al estudiante " << listaEstudiantes->at(pos).nombre << " " << listaEstudiantes->at(pos).apellido
                          << ", con carnet: " << listaEstudiantes->at(pos).carnet << endl;
