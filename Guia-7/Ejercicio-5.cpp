@@ -3,7 +3,7 @@
 using namespace std;
 
 struct Nodo {
-    int valor;
+    int dato;
     struct Nodo *izq;
     struct Nodo *der;
 };
@@ -11,81 +11,96 @@ typedef struct Nodo *Arbol;
 
 Arbol crearNodo(int valor) {
     Arbol h = new Nodo;
-    h->valor = valor;
+    h->dato = valor;
     h->izq = NULL;
     h->der = NULL;
     return h;
 }
 
-void asignarIzq(Arbol a, int valor) {
-    if(a == NULL) {
-        cout << "El árbol está vacío" << endl;
-    }else if(a->izq != NULL) {
-        cout << "Ya exite un subarbol izquierdo" << endl;
-    }else {
-        a->izq = crearNodo(valor);
-    }
-}
-
-void asignarDer(Arbol a, int valor) {
-    if(a == NULL) {
-        cout << "El árbol está vacío" << endl;
-    }else if(a->der != NULL) {
-        cout << "Ya exite un subarbol derecho" << endl;
-    }else {
-        a->der = crearNodo(valor);
-    }
-}
-
 void agregarNodo(Arbol a, int valor) {
     Arbol temp = a;
     while(true) {
-        if(temp->valor == valor) {
-            cout << "El dato ya existe" << endl;
+        if(temp->dato == valor) {
+            cout  << "El dato ya existe" << endl;
             return;
-        }else if(temp->valor > valor) {
+        }else if(temp->dato > valor) {
             if(temp->izq == NULL) {
+                temp->izq = crearNodo(valor);
                 break;
             }else {
                 temp = temp->izq;
             }
         }else {
             if(temp->der == NULL) {
+                temp->der = crearNodo(valor);
                 break;
             }else {
                 temp = temp->der;
             }
         }
     }
+}
 
-    if(temp->valor > valor) {
-        asignarIzq(temp, valor);
+void preOrder(Arbol a) {
+    if(a != NULL) {
+        cout << a->dato << " ";
+        preOrder(a->izq);
+        preOrder(a->der);
+    }
+}
+
+void inOrder(Arbol a) {
+    if(a != NULL) {
+        inOrder(a->izq);
+        cout << a->dato << " ";
+        inOrder(a->der);
+    }
+}
+
+void postOrder(Arbol a) {
+    if(a != NULL) {
+        postOrder(a->izq);
+        postOrder(a->der);
+        cout << a->dato << " ";
+    }
+}
+
+bool buscarDato(Arbol a, int valor) {
+    if(a == NULL) {
+        return false;
+    }
+    if(a->dato == valor) {
+        return true;
+    }
+    if(a->dato > valor) {
+        return buscarDato(a->izq, valor);
     }else {
-        asignarDer(temp, valor);
+        return buscarDato(a->der, valor);
     }
 }
 
-void mostrarArbolPreO(Arbol a) {
-    if(a != NULL) {
-        cout << a->valor << " ";
-        mostrarArbolPreO(a->izq);
-        mostrarArbolPreO(a->der);
+void mostrarLista(vector<int> *lista) {
+    if(lista->empty()) {
+        cout << "La lista está vacía" << endl;
+    }else {
+        for(int i = 0; i < lista->size(); i++) {
+            cout << lista->at(i) << " ";
+        }
     }
 }
 
-void mostrarArbolInO(Arbol a) {
-    if(a != NULL) {
-        mostrarArbolInO(a->izq);
-        cout << a->valor << " ";
-        mostrarArbolInO(a->der);
-    }
-}
+float promedioLista(vector<int> *lista) {
+    if(lista->empty()) {
+        return 0;
+    }else {
+        int suma = 0;
+        for(int i = 0; i < lista->size(); i++) {
+            suma += lista->at(i);
+        }
 
-void mostrarArbolPostO(Arbol a) {
-    if(a != NULL) {
-        mostrarArbolInO(a->izq);
-        mostrarArbolInO(a->der);
-        cout << a->valor << " ";
+        float promedio = suma/lista->size();
+
+        return promedio;
     }
 }
 
@@ -98,7 +113,7 @@ int main() {
     agregarNodo(a, 4);
     agregarNodo(a, 7);
     agregarNodo(a, 14);
-    agregarNodo(a, 13);
+    vector<int> listaEnlazada;
 
     bool status = true;
     bool status2 = true;
@@ -125,15 +140,15 @@ int main() {
                 cin >> opcion2;
                 switch (opcion2) {
                 case 1:
-                    mostrarArbolPreO(a);
+                    preOrder(a);
                     cout << endl;
                     break;
                 case 2:
-                    mostrarArbolInO(a);
+                    inOrder(a);
                     cout << endl;
                     break;
                 case 3:
-                    mostrarArbolPostO(a);
+                    postOrder(a);
                     cout << endl;
                     break;
                 case 4:
@@ -146,10 +161,18 @@ int main() {
             }
             break;
         case 2:
-            
+            cout << "Ingrese un valor a buscar en el árbol: ";
+            int valor;
+            cin >> valor;
+            if(buscarDato(a, valor)) {
+                listaEnlazada.push_back(valor);
+            }else {
+                cout << "El valor no existe en el árbol" << endl;
+            }
             break;
         case 3:
-            
+            mostrarLista(&listaEnlazada);
+            cout << endl;
             break;
         case 4:
             cout << "Fin del programa" << endl;
@@ -160,4 +183,6 @@ int main() {
             break;
         }
     }
+
+    cout << "El promedio de la lista de datos es: " << promedioLista(&listaEnlazada) << endl;
 }
